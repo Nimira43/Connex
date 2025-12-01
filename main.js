@@ -110,20 +110,18 @@ function checkWin(row, col) {
 
   for (let i = 0; i < GRID_ROWS; i++) {
     for (let j = 0; j < GRID_COLS; j++) {
-      if (i == row) {
-        horizontal.push(grid[i][j])
-      }
-      if (j == col) {
-        vertical.push(grid[i][j])
-      }
-      if (i - j == row - col) {
-        diagonalLeft.push(grid[i][j])
-      }
-      if (i + j == row + col) {
-        diagonalRight.push(grid[i][j])
-      }
+      if (i == row) horizontal.push(grid[i][j])
+      if (j == col) vertical.push(grid[i][j])
+      if (i - j == row - col) diagonalLeft.push(grid[i][j])
+      if (i + j == row + col) diagonalRight.push(grid[i][j])
     }
   }
+  return (  
+    connex(diagonalLeft) ||
+    connex(diagonalRight) ||
+    connex(horizontal) ||
+    connex(vertical)
+  )
 }
 
 function connex(cells = []) {}
