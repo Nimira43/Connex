@@ -107,6 +107,12 @@ function checkWin(row, col) {
   let diagonalRight = []
   let horizontal = []
   let vertical = []
+
+  for (let i = 0; i < GRID_ROWS; i++) {
+    for (let j = 0; j < GRID_COLS; j++) {
+      
+    }
+  }
 }
 
 function connex(cells = []) {}
