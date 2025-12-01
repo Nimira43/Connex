@@ -102,7 +102,12 @@ function playGame(timeNow) {
   requestAnimationFrame(playGame)
 }
 
-function checkWin(row, col) {}
+function checkWin(row, col) {
+  let diagonalLeft = []
+  let diagonalRight = []
+  let horizontal = []
+  let vertical = []
+}
 
 function connex(cells = []) {}
 
