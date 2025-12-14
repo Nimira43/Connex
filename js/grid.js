@@ -58,7 +58,7 @@ export function drawGrid() {
     frameHeight
   )
 
-  const margin = cell.w * 0.5
+  const margin = cell.w * 0.5 
   ctx.fillStyle = COLOUR_FRAME_BOTTOM
   ctx.fillRect(
     cell.left - margin,
@@ -73,3 +73,4 @@ export function drawGrid() {
     }
   }
 }
+

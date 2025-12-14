@@ -1,98 +1,86 @@
 import { GRID_COLS, GRID_ROWS, DELAY_AI } from './constants.js'
 import { state } from './state.js'
 import { checkWin } from './winLogic.js'
-import { highlightCell } from './input.js'
+import { highlightCell, selectCell } from './input.js'
 
 export function AI(diff) {
   const { playersTurn, gameOver, grid } = state
 
-  if (playersTurn || gameOver) {
-    return
-  }
+  if (playersTurn || gameOver) return
 
   if (state.timeAI > 0) {
     state.timeAI -= diff
-    if (state.timeAI <= 0) {
-      selectCurrentHighlight()
-    }
+    if (state.timeAI <= 0) selectCell()
     return
   }
 
-  const options = [[], [], [], []]
+  const options = {
+    winNow: [],
+    blockWin: [],
+    safe: [],
+    risky: []
+  }
 
-  let cell
+  for (let col = 0; col < GRID_COLS; col++) {
+    const cell = highlightCell(grid[0][col].centreX, grid[0][col].centreY)
+    if (!cell) continue
 
-  for (let i = 0; i < GRID_COLS; i++) {
-    cell = highlightCell(
-      grid[0][i].centreX,
-      grid[0][i].centreY
-    )
+    cell.owner = playersTurn
+    if (checkWin(cell.row, cell.col)) {
+      options.winNow.push(col)
+      resetCell(cell)
+      continue
+    }
 
-    if (cell == null) {
+    cell.owner = !playersTurn
+    if (checkWin(cell.row, cell.col)) {
+      options.blockWin.push(col)
+      resetCell(cell)
       continue
     }
 
     cell.owner = playersTurn
 
-    if (checkWin(cell.row, cell.col)) {
-      options[0].push(i)
-    } else {
-      cell.owner = !playersTurn
+    if (cell.row > 0) {
+      const below = grid[cell.row - 1][cell.col]
+      below.owner = !playersTurn
 
-      if (checkWin(cell.row, cell.col)) {
-        options[1].push(i)
+      if (checkWin(below.row, below.col)) {
+        options.risky.push(col)
       } else {
-        cell.owner = playersTurn
-
-        if (cell.row > 0) {
-          grid[cell.row - 1][cell.col].owner = !playersTurn
-
-          if (checkWin(cell.row - 1, cell.col)) {
-            options[3].push(i)
-          } else {
-            options[2].push(i)
-          }
-
-          grid[cell.row - 1][cell.col].owner = null
-        } else {
-          options[2].push(i)
-        }
+        options.safe.push(col)
       }
+
+      below.owner = null
+    } else {
+      options.safe.push(col)
     }
 
-    cell.highlight = null
-    cell.owner = null
+    resetCell(cell)
   }
 
   for (const row of grid) {
-    for (const c of row) {
-      c.winner = false
-    }
+    for (const c of row) c.winner = false
   }
 
-  let col = null
+  const chosenCol =
+    pick(options.winNow) ??
+    pick(options.blockWin) ??
+    pick(options.safe) ??
+    pick(options.risky)
 
-  if (options[0].length > 0) {
-    col = randomFrom(options[0])
-  } else if (options[1].length > 0) {
-    col = randomFrom(options[1])
-  } else if (options[2].length > 0) {
-    col = randomFrom(options[2])
-  } else if (options[3].length > 0) {
-    col = randomFrom(options[3])
-  }
-
-  if (col != null) {
-    highlightCell(grid[0][col].centreX, grid[0][col].centreY)
+  if (chosenCol != null) {
+    highlightCell(grid[0][chosenCol].centreX, grid[0][chosenCol].centreY)
     state.timeAI = DELAY_AI
   }
 }
 
-function randomFrom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)]
+function pick(arr) {
+  return arr.length ? arr[Math.floor(Math.random() * arr.length)] : null
 }
 
-import { selectCell } from './input.js'
-function selectCurrentHighlight() {
-  selectCell()
+function resetCell(cell) {
+  cell.owner = null
+  cell.highlight = null
 }
+
