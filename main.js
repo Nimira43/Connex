@@ -332,6 +332,25 @@ function AI(diff) {
     cell.highlight = null
     cell.owner = null
   }
+
+  for (let row of grid) {
+    for (let cell of row) {
+      cell.winner = false
+    }
+  }
+
+  let col
+
+  if (options[0].length > 0) {
+    col = options[0][Math.floor(Math.random() * options[0].length)]
+  } else if (options[1].length > 0) {
+    col = options[1][Math.floor(Math.random() * options[1].length)]
+  } else if (options[2].length > 0) {
+    col = options[2][Math.floor(Math.random() * options[2].length)]
+  } if (options[3].length > 0) {
+    col = options[3][Math.floor(Math.random() * options[3].length)]
+  }
+
 }
 
 function highlightCell(x, y) {}
