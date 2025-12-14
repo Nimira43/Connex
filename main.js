@@ -355,7 +355,19 @@ function AI(diff) {
   timeAI = DELAY_AI
 }
 
-function highlightCell(x, y) {}
+function highlightCell(x, y) {
+  let col = null
+
+  for (let row of grid) {
+    for (let cell of row) {
+      cell.highlight = null
+
+      if (cell.contains(x, y)) {
+        col = cell.col
+      }
+    }
+  }
+}
 
 function highlightGrid(e) {
   if (!playersTurn || gameOver) {
