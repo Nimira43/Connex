@@ -134,6 +134,10 @@ function connex(cells = []) {
       count = 0
       winningCells = []
     }
+    else if (cells[i].owner == lastOwner) {
+      count++
+      winningCells.push(cells[i])
+    }
   }
 }
 
