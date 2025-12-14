@@ -124,7 +124,13 @@ function checkWin(row, col) {
   )
 }
 
-function connex(cells = []) {}
+function connex(cells = []) {
+  let count = 0
+  let lastOwner = null
+  let winningCels = []
+
+  
+}
 
 function click() {
   if (gameOver) {
