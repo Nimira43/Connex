@@ -104,65 +104,66 @@ function click() {
   selectCell()
 }
 
-function createGrid() {
-  grid = []
-  let cell, marginX, marginY
+// function createGrid() {
+//   const { width, height } = state
+//   state.grid = []
+//   let cellSize, marginX, marginY
 
-  if (
-    ((width - margin * 2) * GRID_ROWS) /
-    GRID_COLS < height - margin * 2
-  ) {
-    cell = (width - margin * 2) / GRID_COLS
-    marginX = margin
-    marginY = (height - cell * GRID_ROWS) / 2
-  } else {
-    cell = (height - margin * 2) / GRID_ROWS
-    marginY = margin
-    marginX = (width - cell * GRID_COLS) / 2
-  }
+//   if (
+//     ((width - margin * 2) * GRID_ROWS) /
+//     GRID_COLS < height - margin * 2
+//   ) {
+//     cell = (width - margin * 2) / GRID_COLS
+//     marginX = margin
+//     marginY = (height - cell * GRID_ROWS) / 2
+//   } else {
+//     cell = (height - margin * 2) / GRID_ROWS
+//     marginY = margin
+//     marginX = (width - cell * GRID_COLS) / 2
+//   }
 
-  for (let i = 0; i < GRID_ROWS; i++) {
-    grid[i] = []
-    for(let j = 0; j < GRID_COLS; j++) {
-      let left =  marginX + j * cell 
-      let top =  marginY + i * cell
-      grid[i][j] = new Cell(left, top, cell, cell, i, j) 
-    }
-  }
-}
+//   for (let i = 0; i < GRID_ROWS; i++) {
+//     grid[i] = []
+//     for(let j = 0; j < GRID_COLS; j++) {
+//       let left =  marginX + j * cell 
+//       let top =  marginY + i * cell
+//       grid[i][j] = new Cell(left, top, cell, cell, i, j) 
+//     }
+//   }
+// }
 
-function drawBackground() {
-  ctx.fillStyle = COLOUR_BG
-  ctx.fillRect(0, 0, width, height)
-}
+// function drawBackground() {
+//   ctx.fillStyle = COLOUR_BG
+//   ctx.fillRect(0, 0, width, height)
+// }
 
-function drawGrid() {
-  let cell = grid[0][0]
-  let frameHeight = cell.h * GRID_ROWS
-  let frameWidth = cell.w * GRID_COLS
-  ctx.fillStyle = COLOUR_FRAME
-  ctx.fillRect(
-    cell.left,
-    cell.top,
-    frameWidth,
-    frameHeight
-  )
-  ctx.fillStyle = COLOUR_FRAME_BOTTOM
-  ctx.fillRect(
-    cell.left - margin / 2,
-    cell.top + frameHeight - margin / 2,
-    frameWidth + margin,
-    margin
-  )
+// function drawGrid() {
+//   let cell = grid[0][0]
+//   let frameHeight = cell.h * GRID_ROWS
+//   let frameWidth = cell.w * GRID_COLS
+//   ctx.fillStyle = COLOUR_FRAME
+//   ctx.fillRect(
+//     cell.left,
+//     cell.top,
+//     frameWidth,
+//     frameHeight
+//   )
+//   ctx.fillStyle = COLOUR_FRAME_BOTTOM
+//   ctx.fillRect(
+//     cell.left - margin / 2,
+//     cell.top + frameHeight - margin / 2,
+//     frameWidth + margin,
+//     margin
+//   )
 
-  ctx.fill()
+//   ctx.fill()
 
-  for(let row of grid) {
-    for (let cell of row) {
-      cell.draw(ctx)
-    }
-  }
-}
+//   for(let row of grid) {
+//     for (let cell of row) {
+//       cell.draw(ctx)
+//     }
+//   }
+// }
 
 function drawText() {
   if (!gameOver) {
