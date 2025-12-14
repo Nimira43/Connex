@@ -315,6 +315,16 @@ function AI(diff) {
 
       if (cell.row > 0) {
         grid[cell.row - 1][cell.col].owner = !playersTurn
+        
+        if (checkWin(cell.row - 1, cell.col)) {
+          options[3].push(i)
+        }
+
+        else {
+          options[2].push(i)
+        }
+
+        grid[cell.row - 1][cell.col].owner = null
       }
     }
   }
