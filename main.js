@@ -351,6 +351,8 @@ function AI(diff) {
     col = options[3][Math.floor(Math.random() * options[3].length)]
   }
 
+  highlightCell(grid[0][col].centreX, grid[0][col].centreY)
+  timeAI = DELAY_AI
 }
 
 function highlightCell(x, y) {}
