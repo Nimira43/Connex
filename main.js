@@ -378,6 +378,7 @@ function highlightCell(x, y) {
       return grid[i][col]
     }
   } 
+  return null
 }
 
 function highlightGrid(e) {
