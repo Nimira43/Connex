@@ -127,9 +127,14 @@ function checkWin(row, col) {
 function connex(cells = []) {
   let count = 0
   let lastOwner = null
-  let winningCels = []
+  let winningCells = []
 
-  
+  for (let i = 0; i < cells.length; i++) {
+    if (cells[i].owner == null) {
+      count = 0
+      winningCells = []
+    }
+  }
 }
 
 function click() {
