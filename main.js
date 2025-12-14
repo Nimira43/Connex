@@ -269,7 +269,10 @@ function drawText() {
   }
 }
 
-function AI(diff) {}
+function AI(diff) {
+  if (playersTurn || gameOver)
+    return
+}
 
 function highlightCell(x, y) {}
 
