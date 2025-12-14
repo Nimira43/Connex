@@ -304,6 +304,14 @@ function AI(diff) {
 
     if (checkWin(cell.row, cell.col)) {
       options[0].push(i)
+    } else {
+      cell.owner = !playersTurn
+      
+      if (checkWin(cell.row, cell.col)) {
+        options[1].push(i)
+      } else {
+        cell.owner = playersTurn
+      }
     }
   }
 }
