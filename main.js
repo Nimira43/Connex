@@ -138,6 +138,11 @@ function connex(cells = []) {
       count++
       winningCells.push(cells[i])
     }
+    else {
+      count = 1
+      winningCells = []
+      winningCells.push(cells[i])
+    }
   }
 }
 
