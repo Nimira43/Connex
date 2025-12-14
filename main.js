@@ -312,6 +312,10 @@ function AI(diff) {
       } else {
         cell.owner = playersTurn
       }
+
+      if (cell.row > 0) {
+        grid[cell.row - 1][cell.col].owner = !playersTurn
+      }
     }
   }
 }
