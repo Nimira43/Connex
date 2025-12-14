@@ -23,19 +23,6 @@ window.addEventListener('resize', setDimensions)
 let timeDiff, timeLast
 requestAnimationFrame(playGame)
 
-function playGame(timeNow) {
-  if (!timeLast) {
-    timeLast = timeNow
-  }
-
-  timeDiff = (timeNow - timeLast) / 1000
-  timeLast = timeNow
-  AI(timeDiff)
-  drawBackground()
-  drawGrid()
-  drawText()
-  requestAnimationFrame(playGame)
-}
 
 
 
@@ -43,24 +30,11 @@ function playGame(timeNow) {
 
 
 
-function newGame() {
-  playersTurn = Math.random() < 0.5
-  gameOver = false
-  gameTied = false
-  createGrid()
-}
 
 
 
-function setDimensions() {
-  width = window.innerWidth
-  height = window.innerHeight
-  canvasEl.width = width
-  canvasEl.height = height
-  margin = MARGIN * Math.min(height, width)
 
-  newGame()
-}
+
 
 
 
