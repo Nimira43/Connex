@@ -371,6 +371,13 @@ function highlightCell(x, y) {
   if (col == num) {
     return
   }
+
+  for (let i = GRID_ROWS - 1; i >= 0; i--) {
+    if (grid[i][col].owner == null) {
+      grid[i][col].highlight = playersTurn
+      return grid[i][col]
+    }
+  } 
 }
 
 function highlightGrid(e) {
