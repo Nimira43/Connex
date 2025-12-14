@@ -368,7 +368,7 @@ function highlightCell(x, y) {
     }
   }
 
-  if (col == num) {
+  if (col == null) {
     return
   }
 
@@ -386,7 +386,7 @@ function highlightGrid(e) {
     return
   }
 
-  highlightGrid(e.clientX, e.clientY)
+  highlightCell(e.clientX, e.clientY)
 }
 
 function newGame() {
