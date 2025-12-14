@@ -270,8 +270,17 @@ function drawText() {
 }
 
 function AI(diff) {
-  if (playersTurn || gameOver)
+  if (playersTurn || gameOver) {
     return
+  }
+
+  if (timeAI > 0) {
+    timeAI -= diff
+    if (timeAI <= 0) {
+      selectCell()
+    }
+    return
+  }
 }
 
 function highlightCell(x, y) {}
