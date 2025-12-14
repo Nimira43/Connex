@@ -39,18 +39,6 @@ function playGame(timeNow) {
 
 
 
-function click() {
-  if (gameOver) {
-    newGame()
-    return
-  }
-
-  if (!playersTurn) {
-    return
-  }
-
-  selectCell()
-}
 
 
 function AI(diff) {
@@ -139,39 +127,7 @@ function AI(diff) {
   timeAI = DELAY_AI
 }
 
-function highlightCell(x, y) {
-  let col = null
 
-  for (let row of grid) {
-    for (let cell of row) {
-      cell.highlight = null
-
-      if (cell.contains(x, y)) {
-        col = cell.col
-      }
-    }
-  }
-
-  if (col == null) {
-    return
-  }
-
-  for (let i = GRID_ROWS - 1; i >= 0; i--) {
-    if (grid[i][col].owner == null) {
-      grid[i][col].highlight = playersTurn
-      return grid[i][col]
-    }
-  } 
-  return null
-}
-
-function highlightGrid(e) {
-  if (!playersTurn || gameOver) {
-    return
-  }
-
-  highlightCell(e.clientX, e.clientY)
-}
 
 function newGame() {
   playersTurn = Math.random() < 0.5
@@ -180,47 +136,7 @@ function newGame() {
   createGrid()
 }
 
-function selectCell() {
-  let highlighting = false
-  OUTER: for (let row of grid) {
-    for (let cell of row) {
-      if (cell.highlight != null) {
-        highlighting = true
-        cell.highlight = null
-        cell.owner = playersTurn
 
-        if (checkWin(cell.row, cell.col)) {
-          gameOver = true
-        }
-        break OUTER
-      }
-    }
-  }
-
-  if (!highlighting) {
-    return
-  }
-
-  if (!gameOver) {
-    gameTied = true
-    OUTER: for (let row of grid) {
-      for (let cell of row) {
-        if (cell.owner == null) {
-          gameTied = false
-          break OUTER
-        }
-      }
-    }
-
-    if (gameTied) {
-      gameOver = true
-    }
-  }
-
-  if (!gameOver) {
-    playersTurn = !playersTurn
-  }
-}
 
 function setDimensions() {
   width = window.innerWidth
