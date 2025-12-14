@@ -281,6 +281,12 @@ function AI(diff) {
     }
     return
   }
+
+  let options = []
+  options[0] = []
+  options[1] = []
+  options[2] = []
+  options[3] = []
 }
 
 function highlightCell(x, y) {}
