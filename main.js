@@ -287,6 +287,15 @@ function AI(diff) {
   options[1] = []
   options[2] = []
   options[3] = []
+
+  let cell
+
+  for (let i = 0; i < GRID_COLS; i++) {
+    cell = highlightCell(
+      grid[0][i].centreX,
+      grid[0][i].centreY,
+    )
+  }
 }
 
 function highlightCell(x, y) {}
