@@ -143,7 +143,17 @@ function connex(cells = []) {
       winningCells = []
       winningCells.push(cells[i])
     }
+
+    lastOwner = cells[i].owner
+
+    if (count == 4) {
+      for (let cell of winningCells) {
+        cell.winner = true
+      }
+      return true
+    }
   }
+  return false
 }
 
 function click() {
