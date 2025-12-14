@@ -357,7 +357,13 @@ function AI(diff) {
 
 function highlightCell(x, y) {}
 
-function highlightGrid(e) {}
+function highlightGrid(e) {
+  if (!playersTurn || gameOver) {
+    return
+  }
+
+  highlightGrid(e.clientX, e.clientY)
+}
 
 function newGame() {
   playersTurn = Math.random() < 0.5
