@@ -295,6 +295,16 @@ function AI(diff) {
       grid[0][i].centreX,
       grid[0][i].centreY,
     )
+
+    if (Cell == null) {
+      continue
+    }
+
+    cell.owner = playersTurn
+
+    if (checkWin(cell.row, cell.col)) {
+      options[0].push(i)
+    }
   }
 }
 
