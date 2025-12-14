@@ -367,6 +367,10 @@ function highlightCell(x, y) {
       }
     }
   }
+
+  if (col == num) {
+    return
+  }
 }
 
 function highlightGrid(e) {
