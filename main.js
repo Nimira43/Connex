@@ -291,10 +291,7 @@ function AI(diff) {
   let cell
 
   for (let i = 0; i < GRID_COLS; i++) {
-    cell = highlightCell(
-      grid[0][i].centreX,
-      grid[0][i].centreY,
-    )
+    cell = highlightCell(grid[0][i].centreX, grid[0][i].centreY)
 
     if (Cell == null) {
       continue
@@ -311,22 +308,29 @@ function AI(diff) {
         options[1].push(i)
       } else {
         cell.owner = playersTurn
-      }
+      
+        if (cell.row > 0) {
+          grid[cell.row - 1][cell.col].owner = !playersTurn
+          
+          if (checkWin(cell.row - 1, cell.col)) {
+            options[3].push(i)
+          }
 
-      if (cell.row > 0) {
-        grid[cell.row - 1][cell.col].owner = !playersTurn
-        
-        if (checkWin(cell.row - 1, cell.col)) {
-          options[3].push(i)
+          else {
+            options[2].push(i)
+          }
+
+          grid[cell.row - 1][cell.col].owner = null
         }
 
         else {
           options[2].push(i)
         }
-
-        grid[cell.row - 1][cell.col].owner = null
       }
     }
+
+    cell.highlight = null
+    cell.owner = null
   }
 }
 
