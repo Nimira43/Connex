@@ -113,46 +113,6 @@ function click() {
 //   }
 // }
 
-function drawText() {
-  if (!gameOver) {
-    return
-  }
-
-  let size = grid[0][0].h
-  ctx.fillStyle  = gameTied
-    ? COLOUR_TIE
-    : playersTurn
-    ? COLOUR_RI
-    : COLOUR_AI
-  ctx.font = size + 'px sans-serif'
-  ctx.lineJoin = 'round'
-  ctx.lineWidth = size / 10
-  ctx.fillStyle  = gameTied
-    ? COLOUR_TIE_DARK
-    : playersTurn
-    ? COLOUR_RI_DARK
-    : COLOUR_AI_DARK
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
-
-  let offset = size * 0.6
-  let text = gameTied
-    ? TEXT_TIE
-    : playersTurn
-      ? TEXT_RI
-      : TEXT_AI
-
-  if (gameTied) {
-    ctx.strokeText(text, width / 2, height / 2)
-    ctx.fillText(text, width / 2, height / 2)
-  } else {
-    ctx.strokeText(text, width / 2, height / 2 - offset)
-    ctx.fillText(text, width / 2, height / 2 - offset)
-    ctx.strokeText(TEXT_WIN, width / 2, height / 2 + offset)
-    ctx.fillText(TEXT_WIN, width / 2, height / 2 + offset)
-  }
-}
-
 function AI(diff) {
   if (playersTurn || gameOver) {
     return
