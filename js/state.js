@@ -11,3 +11,4 @@ export const state = {
   ctx: null,
   timeLast: null,
 }
+
