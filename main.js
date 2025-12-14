@@ -37,59 +37,7 @@ function playGame(timeNow) {
   requestAnimationFrame(playGame)
 }
 
-function checkWin(row, col) {
-  let diagonalLeft = []
-  let diagonalRight = []
-  let horizontal = []
-  let vertical = []
 
-  for (let i = 0; i < GRID_ROWS; i++) {
-    for (let j = 0; j < GRID_COLS; j++) {
-      if (i == row) horizontal.push(grid[i][j])
-      if (j == col) vertical.push(grid[i][j])
-      if (i - j == row - col) diagonalLeft.push(grid[i][j])
-      if (i + j == row + col) diagonalRight.push(grid[i][j])
-    }
-  }
-  return (  
-    connex(diagonalLeft) ||
-    connex(diagonalRight) ||
-    connex(horizontal) ||
-    connex(vertical)
-  )
-}
-
-function connex(cells = []) {
-  let count = 0
-  let lastOwner = null
-  let winningCells = []
-
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i].owner == null) {
-      count = 0
-      winningCells = []
-    }
-    else if (cells[i].owner == lastOwner) {
-      count++
-      winningCells.push(cells[i])
-    }
-    else {
-      count = 1
-      winningCells = []
-      winningCells.push(cells[i])
-    }
-
-    lastOwner = cells[i].owner
-
-    if (count == 4) {
-      for (let cell of winningCells) {
-        cell.winner = true
-      }
-      return true
-    }
-  }
-  return false
-}
 
 function click() {
   if (gameOver) {
